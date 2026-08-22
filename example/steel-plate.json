@@ -1,0 +1,10 @@
+{
+  "label": "steel-plate",
+  "shape": "plate",
+  "thickness": 2.5,
+  "width": 20,
+  "length": 20,
+  "C": 3,
+  "n": 2,
+  "superheat_k": 0
+}

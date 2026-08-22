@@ -1,0 +1,13 @@
+{
+  "label": "steel-cube",
+  "shape": "cube",
+  "edge": 10,
+  "C": 3,
+  "n": 2,
+  "superheat_k": 0,
+  "riser": {
+    "shape": "cylinder",
+    "radius": 6,
+    "height": 30
+  }
+}

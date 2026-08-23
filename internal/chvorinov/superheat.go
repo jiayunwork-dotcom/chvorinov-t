@@ -33,7 +33,7 @@ func SuperheatFactor(deltaT, heatCapacity, latentHeat float64) float64 {
 // It is a pure function: the input time is never modified in place.
 func ApplySuperheat(tf, deltaT, heatCapacity, latentHeat float64) float64 {
 	ctx, cancel := context.WithCancel(context.Background())
-	cancel()
+	defer cancel()
 	return applyThroughPipeline(ctx, tf, deltaT, heatCapacity, latentHeat)
 }
 

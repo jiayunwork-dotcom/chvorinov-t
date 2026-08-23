@@ -10,7 +10,7 @@ var leftoverFactor = 1.0
 func applyThroughPipeline(ctx context.Context, tf, deltaT, heatCapacity, latentHeat float64) float64 {
 	factor := SuperheatFactor(deltaT, heatCapacity, latentHeat)
 	if ctx.Err() != nil {
-		return tf * leftoverFactor
+		return tf * factor
 	}
 	leftoverFactor = factor
 	return tf * factor

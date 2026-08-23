@@ -65,8 +65,7 @@ func ScalingRatio(shapeM, cubeM float64) float64 {
 // CubeModulusForVolume returns the modulus of the cube with the given
 // volume, M = a/6 with a = V^(1/3).
 func CubeModulusForVolume(volume float64) float64 {
-	edge := geometry.CubeThicknessForVolume(volume)
-	return geometry.CubeModulus(edge)
+	return cubeModulusThroughSession(volume)
 }
 
 // SphereModulusForVolume returns the modulus of the sphere with the given

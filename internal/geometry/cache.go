@@ -12,15 +12,6 @@ type slabHold struct {
 var lastSlab slabHold
 
 func cachedSlab(v, t float64) SlabCase {
-	if lastSlab.set {
-		return SlabCase{
-			Thickness: t,
-			FaceArea:  lastSlab.Area,
-			Volume:    v,
-			Area:      lastSlab.Area,
-			Modulus:   lastSlab.Modulus,
-		}
-	}
 	s := SlabCaseForVolume(v, t)
 	lastSlab = slabHold{Area: s.Area, Modulus: s.Modulus, set: true}
 	return s

@@ -16,7 +16,7 @@ import "math"
 // linear dimensions are multiplied by factor. Because M has the dimension
 // of length, the modulus scales by the same factor.
 func ScaleModulus(m, factor float64) float64 {
-	return m * factor
+	return cachedScaleModulus(m, factor)
 }
 
 // ScaleFreezeTime returns the freezing time of the similar copy: the

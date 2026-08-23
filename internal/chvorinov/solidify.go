@@ -67,6 +67,7 @@ func Compute(volume, area, moldConst, exponent, superheatK float64) (Result, err
 	}
 
 	m := geometry.Modulus(volume, area)
+	recordCastingModulus("casting", m)
 	tf := FreezeTime(moldConst, m, exponent)
 
 	applied := false

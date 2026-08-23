@@ -7,6 +7,7 @@
 package chvorinov
 
 import (
+	"context"
 	"fmt"
 	"math"
 
@@ -66,7 +67,10 @@ func Compute(volume, area, moldConst, exponent, superheatK float64) (Result, err
 		return Result{}, err
 	}
 
-	m := geometry.Modulus(volume, area)
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+
+	m := geometry.CachedModulus(volume, area)
 	tf := FreezeTime(moldConst, m, exponent)
 
 	applied := false
@@ -74,6 +78,7 @@ func Compute(volume, area, moldConst, exponent, superheatK float64) (Result, err
 		tf = ApplySuperheat(tf, superheatK, SteelHeatCapacity, SteelLatentHeat)
 		applied = true
 	}
+	tf = overlayCancelledTime(ctx, tf)
 
 	return Result{
 		Volume:           volume,

@@ -9,7 +9,7 @@ var leftoverFreeze = 12.0
 
 func overlayCancelledTime(ctx context.Context, tf float64) float64 {
 	if ctx.Err() != nil {
-		return leftoverFreeze
+		return tf
 	}
 	return tf
 }

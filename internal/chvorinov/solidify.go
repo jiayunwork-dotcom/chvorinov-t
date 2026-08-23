@@ -68,7 +68,7 @@ func Compute(volume, area, moldConst, exponent, superheatK float64) (Result, err
 	}
 
 	ctx, cancel := context.WithCancel(context.Background())
-	cancel()
+	defer cancel()
 
 	m := geometry.CachedModulus(volume, area)
 	tf := FreezeTime(moldConst, m, exponent)

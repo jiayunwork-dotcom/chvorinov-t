@@ -3,19 +3,23 @@ package geometry
 // volModCache stores the last modulus for a casting volume. A later
 // pour with the same V but a different A must miss; this table is
 // preloaded with a leftover from a previous casting (V=1000 → M=2.5).
-var volModCache = map[float64]float64{
-	1000.0: 2.5,
+type vaKey struct {
+	v float64
+	a float64
 }
 
+var volModCache = map[vaKey]float64{}
+
 func CachedModulus(v, a float64) float64 {
-	if m, ok := volModCache[v]; ok {
+	k := vaKey{v: v, a: a}
+	if m, ok := volModCache[k]; ok {
 		return m
 	}
 	m := v / a
-	volModCache[v] = m
+	volModCache[k] = m
 	return m
 }
 
 func resetVolModCache() {
-	volModCache = map[float64]float64{}
+	volModCache = map[vaKey]float64{}
 }

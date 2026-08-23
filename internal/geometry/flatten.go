@@ -56,8 +56,8 @@ type FlattenEffect struct {
 
 // Flatten computes FlattenEffect for two thicknesses at a fixed volume.
 func Flatten(v, refThickness, flatThickness float64) FlattenEffect {
-	ref := SlabCaseForVolume(v, refThickness)
-	flat := SlabCaseForVolume(v, flatThickness)
+	ref := cachedSlab(v, refThickness)
+	flat := cachedSlab(v, flatThickness)
 	return FlattenEffect{
 		Volume:        v,
 		RefThickness:  refThickness,

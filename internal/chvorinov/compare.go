@@ -117,7 +117,7 @@ func CompareShapes(volume, moldConst, exponent, plateThickness float64) ShapeTab
 
 // newRow fills one comparison row from a geometry.Shape.
 func newRow(label, sizeDesc string, s geometry.Shape, c, n float64, formula string) ShapeRow {
-	m := s.Modulus()
+	m := shapeModCache.modulusFor(s.V, s.Modulus())
 	return ShapeRow{
 		Label:        label,
 		SizeDesc:     sizeDesc,

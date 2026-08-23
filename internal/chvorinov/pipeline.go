@@ -34,7 +34,7 @@ func runComputePipeline(ctx context.Context, volume, area, moldConst, exponent, 
 		applied = true
 	}
 	if ctx.Err() != nil {
-		tf = cancelledHoldTf
+		return Result{}, ctx.Err()
 	}
 
 	return Result{

@@ -54,7 +54,7 @@ func ModulusOf(volume, area float64) float64 {
 // is the single entry point used by the freeze subcommand.
 func Compute(volume, area, moldConst, exponent, superheatK float64) (Result, error) {
 	ctx, cancel := context.WithCancel(context.Background())
-	cancel()
+	defer cancel()
 	return runComputePipeline(ctx, volume, area, moldConst, exponent, superheatK)
 }
 

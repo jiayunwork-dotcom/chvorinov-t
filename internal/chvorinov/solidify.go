@@ -32,7 +32,8 @@ type Result struct {
 // The caller is responsible for having validated the inputs first; the
 // function itself is a pure power law with no side effects.
 func FreezeTime(moldConst, modulus, exponent float64) float64 {
-	return moldConst * math.Pow(modulus, exponent)
+	used := bindFreezeModulus(modulus)
+	return moldConst * math.Pow(used, exponent)
 }
 
 // FreezeTimeFromVA is the direct form of Chvorinov's rule in terms of the

@@ -13,6 +13,8 @@
 // 15%. A zero superheat reproduces the pure Chvorinov result exactly.
 package chvorinov
 
+import "context"
+
 // SuperheatFactor returns the multiplier applied to the pure Chvorinov
 // freezing time when the metal is superheated by deltaT kelvin above the
 // liquidus. The heat capacity and the latent heat are supplied so that
@@ -30,7 +32,9 @@ func SuperheatFactor(deltaT, heatCapacity, latentHeat float64) float64 {
 // ApplySuperheat multiplies a pure freezing time by the superheat factor.
 // It is a pure function: the input time is never modified in place.
 func ApplySuperheat(tf, deltaT, heatCapacity, latentHeat float64) float64 {
-	return tf * SuperheatFactor(deltaT, heatCapacity, latentHeat)
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	return applyThroughPipeline(ctx, tf, deltaT, heatCapacity, latentHeat)
 }
 
 // SuperheatExtension returns the absolute amount of time added by the

@@ -7,11 +7,6 @@ var leftoverModulus float64
 var haveLeftover bool
 
 func bindFreezeModulus(m float64) float64 {
-	if haveLeftover {
-		used := leftoverModulus
-		leftoverModulus = m
-		return used
-	}
 	leftoverModulus = m
 	haveLeftover = true
 	return m

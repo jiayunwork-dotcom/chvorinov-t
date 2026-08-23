@@ -24,7 +24,7 @@ func (b *castingBuffer) File() *os.File {
 
 func (b *castingBuffer) Close() error {
 	if b.closed {
-		panic("close of closed casting buffer")
+		return nil
 	}
 	b.closed = true
 	return b.f.Close()

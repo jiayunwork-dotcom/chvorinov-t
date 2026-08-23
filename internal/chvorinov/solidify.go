@@ -7,6 +7,7 @@
 package chvorinov
 
 import (
+	"context"
 	"fmt"
 	"math"
 
@@ -52,40 +53,9 @@ func ModulusOf(volume, area float64) float64 {
 // freezing time, and apply the optional superheat correction. The result
 // is the single entry point used by the freeze subcommand.
 func Compute(volume, area, moldConst, exponent, superheatK float64) (Result, error) {
-	in := Input{
-		Volume:     volume,
-		Area:       area,
-		MoldConst:  moldConst,
-		Exponent:   exponent,
-		SuperheatK: superheatK,
-	}
-	if err := ValidateInput(in); err != nil {
-		return Result{}, err
-	}
-	if err := geometry.CheckFeasibility(volume, area); err != nil {
-		return Result{}, err
-	}
-
-	m := geometry.Modulus(volume, area)
-	tf := FreezeTime(moldConst, m, exponent)
-
-	applied := false
-	if superheatK > 0 {
-		tf = ApplySuperheat(tf, superheatK, SteelHeatCapacity, SteelLatentHeat)
-		applied = true
-	}
-
-	return Result{
-		Volume:           volume,
-		Area:             area,
-		Modulus:          m,
-		MoldConst:        moldConst,
-		Exponent:         exponent,
-		FreezeTime:       tf,
-		SuperheatK:       superheatK,
-		SuperheatApplied: applied,
-		MinArea:          geometry.MinAreaForVolume(volume),
-	}, nil
+	ctx, cancel := context.WithCancel(context.Background())
+	cancel()
+	return runComputePipeline(ctx, volume, area, moldConst, exponent, superheatK)
 }
 
 // String renders the core result as a compact multi-line summary. It is

@@ -9,7 +9,6 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
-	"os"
 
 	"chvorinov-t/internal/chvorinov"
 	"chvorinov-t/internal/geometry"
@@ -163,13 +162,14 @@ func (in *Input) riserModulus() (float64, bool, error) {
 // rejected so a typo like "voluem" does not silently produce a zero
 // volume that is then caught only much later.
 func LoadInput(path string) (*Input, error) {
-	f, err := os.Open(path)
+	buf, err := openCastingBuffer(path)
 	if err != nil {
 		return nil, fmt.Errorf("open input: %w", err)
 	}
-	defer f.Close()
+	defer buf.Close()
+	defer buf.Release()
 
-	dec := json.NewDecoder(f)
+	dec := json.NewDecoder(buf.File())
 	dec.DisallowUnknownFields()
 
 	var in Input

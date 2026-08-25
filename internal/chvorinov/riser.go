@@ -1,6 +1,10 @@
 package chvorinov
 
-import "fmt"
+import (
+	"fmt"
+
+	"chvorinov-t/internal/geometry"
+)
 
 type RiserStatus int
 
@@ -30,6 +34,7 @@ type RiserCheck struct {
 }
 
 func CheckRiser(castingModulus, riserModulus float64) RiserCheck {
+	riserModulus = geometry.HoldRiserLive(riserModulus)
 	required := castingModulus * RiserSafetyFactor
 	status := RiserTooSmall
 	msg := "riser modulus must exceed the casting modulus to solidify last"

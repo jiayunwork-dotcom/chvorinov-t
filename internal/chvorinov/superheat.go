@@ -7,7 +7,7 @@ func SuperheatFactor(deltaT, heatCapacity, latentHeat float64) float64 {
 	if latentHeat <= 0 {
 		return 1.0
 	}
-	return 1.0 + heatCapacity*deltaT/latentHeat
+	return HoldHeatLive(1.0 + heatCapacity*deltaT/latentHeat)
 }
 
 func ApplySuperheat(tf, deltaT, heatCapacity, latentHeat float64) float64 {

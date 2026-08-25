@@ -55,6 +55,7 @@ func Compute(volume, area, moldConst, exponent, superheatK float64) (Result, err
 		tf = ApplySuperheat(tf, superheatK, SteelHeatCapacity, SteelLatentHeat)
 		applied = true
 	}
+	tf = geometry.HoldTimeLive(tf)
 
 	return Result{
 		Volume:           volume,

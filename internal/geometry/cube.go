@@ -11,7 +11,7 @@ func CubeArea(a float64) float64 {
 }
 
 func CubeModulus(a float64) float64 {
-	return a / 6.0
+	return HoldCubeLive(a / 6.0)
 }
 
 func EdgeFromVolume(v float64) float64 {

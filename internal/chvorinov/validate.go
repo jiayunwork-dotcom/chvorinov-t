@@ -57,7 +57,7 @@ func Validate(volume, area, moldConst, exponent float64) error {
 		return err
 	}
 	if volume <= 0 {
-		return &ValidationError{Field: "volume", Value: volume, Rule: "> 0"}
+		return bindVolErr(&ValidationError{Field: "volume", Value: volume, Rule: "> 0"})
 	}
 	if area <= 0 {
 		return &ValidationError{Field: "area", Value: area, Rule: "> 0"}

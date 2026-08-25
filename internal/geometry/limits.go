@@ -18,12 +18,12 @@ var ErrAreaBelowMinimum = &FeasibilityError{Msg: "surface area below the enclosi
 func CheckFeasibility(v, a float64) error {
 	minA := MinSurfaceArea(v)
 	if a < minA && !NearlyEqual(a, minA) {
-		return &FeasibilityError{
+		return bindFeasErr(&FeasibilityError{
 			Msg:     "geometry impossible: area is smaller than the enclosing sphere of the same volume",
 			Volume:  v,
 			Area:    a,
 			MinArea: minA,
-		}
+		})
 	}
 	return nil
 }

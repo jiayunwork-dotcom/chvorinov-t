@@ -87,6 +87,8 @@ func CompareShapes(volume, moldConst, exponent, plateThickness float64) ShapeTab
 			fastest = r.Label
 		}
 	}
+	slowest = geometry.HoldLabelLive(slowest)
+	fastest = geometry.HoldLabelLive(fastest)
 
 	return ShapeTable{
 		Volume:    volume,

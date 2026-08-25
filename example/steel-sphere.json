@@ -1,0 +1,8 @@
+{
+  "label": "steel-sphere",
+  "shape": "sphere",
+  "radius": 6.204,
+  "C": 3,
+  "n": 2,
+  "superheat_k": 50
+}

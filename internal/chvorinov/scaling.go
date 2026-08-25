@@ -1,6 +1,10 @@
 package chvorinov
 
-import "math"
+import (
+	"math"
+
+	"chvorinov-t/internal/geometry"
+)
 
 func ScaleModulus(m, factor float64) float64 {
 	return m * factor
@@ -34,7 +38,7 @@ type CrossScaleReport struct {
 
 func CrossScale(m, tf, factor, exponent float64) CrossScaleReport {
 	newM := ScaleModulus(m, factor)
-	newTf := ScaleFreezeTime(tf, factor, exponent)
+	newTf := geometry.HoldScaleLive(ScaleFreezeTime(tf, factor, exponent))
 	return CrossScaleReport{
 		Factor:        factor,
 		Exponent:      exponent,

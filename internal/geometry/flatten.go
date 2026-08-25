@@ -25,7 +25,7 @@ func PlateSeriesForVolume(v float64, thicknesses []float64) []SlabCase {
 			Modulus:   PlateModulus(t, w, l),
 		})
 	}
-	return cases
+	return overlaySlabScratch(cases)
 }
 
 type FlattenEffect struct {

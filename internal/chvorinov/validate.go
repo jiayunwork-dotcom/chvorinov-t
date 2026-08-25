@@ -44,6 +44,9 @@ func checkFinite(field string, v float64) error {
 }
 
 func Validate(volume, area, moldConst, exponent float64) error {
+	if err := abortFreezeContext(); err != nil {
+		return err
+	}
 	if err := checkFinite("volume", volume); err != nil {
 		return err
 	}
